@@ -1,0 +1,34 @@
+<div class="container">
+  <!-- Display a seating layout for the selected showtime.
+Allow users to select seats and proceed to booking. -->
+
+  <h1 class="title">Select your seats</h1>
+
+  <div class="showtime">
+    <p>Show Timings: {{ movie.showtimes[showtimeId].toLocaleString() }}</p>
+  </div>
+
+  <div class="seating-layout">
+    <div *ngFor="let row of rows; let i = index" class="row">
+      <div
+        *ngFor="let seat of seats; let j = index"
+        class="seat"
+        [class.selected]="selectedSeats.includes(i * seats.length + j)"
+        (click)="onSeatSelect(i * seats.length + j)"
+      >
+        {{ String.fromCharCode(65 + i) }}{{ j + 1 }}
+      </div>
+    </div>
+  </div>
+
+  <div class="selected-seats">
+    <p *ngIf="selectedSeats.length === 0">No seats selected</p>
+    <p *ngIf="selectedSeats.length > 0">
+      Selected seats: {{ selectedSeats.join(", ") }}
+    </p>
+  </div>
+
+  <button [disabled]="selectedSeats.length === 0" (click)="onBookSeats()">
+    Book seats
+  </button>
+</div>

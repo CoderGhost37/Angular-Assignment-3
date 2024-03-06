@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="title">Movies</h1>
+
+  <div class="movie-list">
+    <div class="movie-list-item" *ngFor="let movie of movies; let i = index">
+      <img
+        [src]="movie.poster"
+        alt="{{ movie.title }}"
+        class="movie-list-item-img"
+      />
+      <h4>{{ movie.title }}</h4>
+
+      <div class="movie-list-item-actions">
+        <button class="btn showtime-btn" (click)="onViewShowtimeClick(i)">
+          Showtimes
+        </button>
+        <button class="btn" (click)="onEditMovieClick(i)">Edit</button>
+        <button class="btn delete-btn" (click)="onDeleteMovieClick(i)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container form-container">
+  <h1 class="title">{{ isEditMode ? "Edit Showtime" : "Add Showtime" }}</h1>
+
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="form">
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input
+        type="date"
+        id="date"
+        class="form-control"
+        ngModel
+        name="date"
+        #date="ngModel"
+        required
+      />
+      <p class="form-group-error" *ngIf="!date.valid && date.touched">
+        Date is required
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="time">Time</label>
+      <input
+        type="time"
+        id="time"
+        class="form-control"
+        ngModel
+        #time="ngModel"
+        name="time"
+        required
+      />
+      <p class="form-group-error" *ngIf="!time.valid && time.touched">
+        Time is required
+      </p>
+    </div>
+    <button class="btn btn-form" type="submit" [disabled]="!authForm.valid">
+      {{ isEditMode ? "Edit Showtime" : "Add Showtime" }}
+    </button>
+  </form>
+</div>

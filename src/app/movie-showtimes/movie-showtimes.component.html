@@ -1,0 +1,17 @@
+<div class="container">
+  <h1 class="title">Showtimes for {{ movie.title }}</h1>
+
+  <div class="movie-showtimes">
+    <div
+      (click)="onBookShowtime(i)"
+      *ngFor="let showtime of movie.showtimes; let i = index"
+      class="showtime"
+    >
+      <p>{{ showtime.toLocaleString() }}</p>
+    </div>
+  </div>
+
+  <div class="showtime-btn" *ngIf="user && user.role === 'Admin'">
+    <button class="btn" (click)="addShowtime()">Add Showtime</button>
+  </div>
+</div>

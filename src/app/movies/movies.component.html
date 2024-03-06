@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 class="title">Movies</h1>
+
+  <div class="movie-list">
+    <div
+      (click)="onMovieClick(i)"
+      class="movie-list-item"
+      *ngFor="let movie of movies; let i = index"
+    >
+      <img
+        [src]="movie.poster"
+        alt="{{ movie.title }}"
+        class="movie-list-item-img"
+      />
+      <h4>{{ movie.title }}</h4>
+    </div>
+  </div>
+</div>

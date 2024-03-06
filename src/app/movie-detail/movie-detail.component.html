@@ -1,0 +1,17 @@
+<div class="container movie">
+  <img [src]="movie.poster" [alt]="movie.title" class="movie-img" />
+
+  <div class="movie-details">
+    <h1>{{ movie.title }}</h1>
+    <p class="movie-details-desc">{{ movie.description }}</p>
+
+    <!-- <iframe
+      [src]="movie.trailer"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe> -->
+
+    <a class="btn showtime" routerLink="showtimes"> View Showtimes </a>
+  </div>
+</div>

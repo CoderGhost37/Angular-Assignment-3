@@ -1,0 +1,34 @@
+.navbar {
+    background-color: beige;
+    padding: 10px;
+    margin: 0;
+}
+
+.navbar-list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+}
+
+.navbar-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-list-item {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.navbar-list-item a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.active {
+    background-color: burlywood;
+}

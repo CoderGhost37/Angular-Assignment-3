@@ -1,0 +1,69 @@
+<div class="container form-container">
+  <h1 class="title">Sign Up</h1>
+
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="form">
+    <div class="form-group">
+      <label for="role">Role</label>
+      <select
+        class="form-control"
+        id="role"
+        name="role"
+        ngModel
+        required
+        #role="ngModel"
+      >
+        <option value="" disabled selected>Select Role</option>
+        <option value="User">User</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <div class="form-group-error" *ngIf="!role.valid && role.touched">
+        <p *ngIf="role.errors?.required">Role is required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        #email="ngModel"
+        required
+        email
+      />
+      <div class="form-group-error" *ngIf="!email.valid && email.touched">
+        <p *ngIf="email.errors?.required">Email is required</p>
+        <p *ngIf="email.errors?.email">Please enter a valid email</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        ngModel
+        #password="ngModel"
+        name="password"
+        required
+        minlength="6"
+      />
+      <div class="form-group-error" *ngIf="!password.valid && password.touched">
+        <p *ngIf="password.errors?.required">Password is required</p>
+        <p *ngIf="password.errors?.minlength">
+          Password must be at least 6 characters long
+        </p>
+      </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="error">
+      <p>{{ error }}</p>
+    </div>
+    <button class="btn btn-form" type="submit" [disabled]="!authForm.valid">
+      Sign Up
+    </button>
+    <p class="form-switch">
+      Already have an account? <span (click)="onSwitchMode()">Sign In</span>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,47 @@
+.movie-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    gap: 50px;
+}
+
+.movie-list-item {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    width: 300px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.movie-list-item-img {
+    border-radius: 10px 10px 0 0;
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+}
+
+.movie-list-item-actions {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    padding: 0 10px;
+
+}
+
+.showtime-btn {
+    background-color: #029e02;
+}
+
+.delete-btn {
+    background-color: #ff0000;
+}
