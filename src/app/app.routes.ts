@@ -44,7 +44,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'review-booking/:bookingId',
+    path: 'review-booking/:id',
     loadComponent: () =>
       import('./review-booking/review-booking.component').then(
         (m) => m.ReviewBookingComponent

@@ -1,1 +1,15 @@
-<p>review-booking works!</p>
+<div class="confirmation-page">
+  <h2>Booking Confirmation</h2>
+  <p>Thank you for booking your seats. Your booking details are confirmed.</p>
+
+  <div class="container">
+    <h4>Movie: {{ movie.title }}</h4>
+    <h4>Show Timings: {{ movie.showtimes[showtimeId].toLocaleString() }}</h4>
+    <div *ngIf="selectedSeats.length > 0" class="confirmation-details">
+      <h3>Selected Seats:</h3>
+      <ul>
+        <li *ngFor="let seat of selectedSeats">{{ seat }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ export class Movie {
   poster: string;
   trailer: string;
   showtimes: Date[];
+  rows: { seats: { label: string; selected: boolean; booked: boolean }[] }[];
 
   constructor(
     title: string,
@@ -23,6 +24,29 @@ export class Movie {
     this.poster = poster;
     this.trailer = trailer;
     this.showtimes = showtimes;
+    this.rows = [
+      {
+        seats: [
+          { label: 'A1', selected: false, booked: false },
+          { label: 'A2', selected: false, booked: false },
+          { label: 'A3', selected: false, booked: false },
+        ],
+      },
+      {
+        seats: [
+          { label: 'B1', selected: false, booked: true },
+          { label: 'B2', selected: false, booked: false },
+          { label: 'B3', selected: false, booked: false },
+        ],
+      },
+      {
+        seats: [
+          { label: 'C1', selected: false, booked: false },
+          { label: 'C2', selected: false, booked: false },
+          { label: 'C3', selected: false, booked: false },
+        ],
+      },
+    ];
   }
 }
 
@@ -86,9 +110,36 @@ export class MoviesService {
     const timeArray = time.split(':');
     newShowtime.setHours(+timeArray[0]);
     newShowtime.setMinutes(+timeArray[1]);
-    console.log(newShowtime);
 
     this.movies[movieId].showtimes.push(newShowtime);
+    this.moviesChanged.next(this.movies.slice());
+  }
+
+  updateShowtime(
+    movieId: number,
+    showtimeId: number,
+    date: Date,
+    time: string
+  ) {
+    const newShowtime = new Date(date);
+    const timeArray = time.split(':');
+    newShowtime.setHours(+timeArray[0]);
+    newShowtime.setMinutes(+timeArray[1]);
+
+    this.movies[movieId].showtimes[showtimeId] = new Date(newShowtime);
+    this.moviesChanged.next(this.movies.slice());
+  }
+
+  bookSeats(movieId: number, showtimeId: number, selectedSeats: any[]) {
+    selectedSeats.forEach((seat) => {
+      this.movies[movieId].rows.forEach((row) => {
+        row.seats.forEach((s) => {
+          if (s.label === seat.label) {
+            s.booked = true;
+          }
+        });
+      });
+    });
     this.moviesChanged.next(this.movies.slice());
   }
 }

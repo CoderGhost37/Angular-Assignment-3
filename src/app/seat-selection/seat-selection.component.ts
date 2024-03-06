@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Movie, MoviesService } from '../movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-seat-selection',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './seat-selection.component.html',
   styleUrl: './seat-selection.component.css',
 })
@@ -13,7 +14,7 @@ export class SeatSelectionComponent {
   movie: Movie;
   id: number;
   showtimeId: number;
-  selectedSeats: number[] = [];
+  selectedSeats = [];
 
   constructor(
     private moviesService: MoviesService,
@@ -29,5 +30,27 @@ export class SeatSelectionComponent {
     });
   }
 
-  onBookSeats() {}
+  toggleSeatSelection(rowIndex: number, seatIndex: number): void {
+    const seat = this.movie.rows[rowIndex].seats[seatIndex];
+    if (seat.booked) {
+      return;
+    }
+    seat.selected = !seat.selected;
+
+    if (seat.selected) {
+      this.selectedSeats.push(seat);
+    } else {
+      this.selectedSeats = this.selectedSeats.filter(
+        (selectedSeat) => selectedSeat !== seat
+      );
+    }
+  }
+
+  onBookSeats() {
+    const bookedSeats = this.selectedSeats.map((seat) => seat.label);
+    this.moviesService.bookSeats(this.id, this.showtimeId, this.selectedSeats);
+    this.router.navigate(['/review-booking', this.id], {
+      queryParams: { showtimeId: this.showtimeId, seats: bookedSeats },
+    });
+  }
 }

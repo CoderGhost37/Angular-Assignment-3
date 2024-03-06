@@ -27,7 +27,7 @@ export class ShowtimeFormComponent {
     this.isEditMode = this.route.snapshot.queryParams['edit'] === '1';
     this.showtimeId = +this.route.snapshot.queryParams['showtimeId'];
     this.route.params.subscribe((params) => {
-      this.movieId = +params['id'];
+      this.movieId = +params['movieId'];
       if (this.isEditMode) {
         this.showtime = this.moviesService.getShowtime(
           this.movieId,
@@ -42,14 +42,12 @@ export class ShowtimeFormComponent {
     const time = form.value.time;
 
     if (this.isEditMode) {
-      // this.moviesService.updateShowtime(
-      //   this.movieId,
-      //   this.showtimeId,
-      //   date,
-      //   time,
-      //   price,
-      //   hall
-      // );
+      this.moviesService.updateShowtime(
+        this.movieId,
+        this.showtimeId,
+        date,
+        time
+      );
     } else {
       this.moviesService.addShowtime(this.movieId, date, time);
     }

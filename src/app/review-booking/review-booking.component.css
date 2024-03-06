@@ -1,0 +1,23 @@
+.confirmation-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.confirmation-details {
+    margin-top: 20px;
+}
+
+.confirmation-details h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.confirmation-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.confirmation-details li {
+    margin: 5px;
+    font-weight: bold;
+}

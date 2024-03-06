@@ -1,34 +1,36 @@
 <div class="container">
-  <!-- Display a seating layout for the selected showtime.
-Allow users to select seats and proceed to booking. -->
-
   <h1 class="title">Select your seats</h1>
 
-  <div class="showtime">
+  <div class="showtime title">
     <p>Show Timings: {{ movie.showtimes[showtimeId].toLocaleString() }}</p>
   </div>
 
-  <div class="seating-layout">
-    <div *ngFor="let row of rows; let i = index" class="row">
+  <div class="seat-layout">
+    <div *ngFor="let row of movie.rows; let rowIndex = index" class="seat-row">
       <div
-        *ngFor="let seat of seats; let j = index"
+        *ngFor="let seat of row.seats; let seatIndex = index"
         class="seat"
-        [class.selected]="selectedSeats.includes(i * seats.length + j)"
-        (click)="onSeatSelect(i * seats.length + j)"
+        [class.booked]="seat.booked"
+        [class.selected]="seat.selected"
+        (click)="toggleSeatSelection(rowIndex, seatIndex)"
       >
-        {{ String.fromCharCode(65 + i) }}{{ j + 1 }}
+        {{ seat.label }}
       </div>
     </div>
   </div>
 
-  <div class="selected-seats">
-    <p *ngIf="selectedSeats.length === 0">No seats selected</p>
-    <p *ngIf="selectedSeats.length > 0">
-      Selected seats: {{ selectedSeats.join(", ") }}
-    </p>
+  <div *ngIf="selectedSeats.length > 0" class="selected-seats">
+    <h2>Selected Seats:</h2>
+    <ul>
+      <li *ngFor="let seat of selectedSeats">{{ seat.label }}</li>
+    </ul>
   </div>
 
-  <button [disabled]="selectedSeats.length === 0" (click)="onBookSeats()">
+  <button
+    class="btn"
+    [disabled]="selectedSeats.length === 0"
+    (click)="onBookSeats()"
+  >
     Book seats
   </button>
 </div>
